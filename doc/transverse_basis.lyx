@@ -1,0 +1,676 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass amsart
+\use_default_options true
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language russian
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language french
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section
+Постановка задачи
+\end_layout
+
+\begin_layout Standard
+Дана замкнутая (периодическая) гладкая кривая 
+\begin_inset Formula $\gamma_{s}:\,\mathbb{R}\to\mathbb{R}^{n}$
+\end_inset
+
+ с естественным папарметром 
+\begin_inset Formula $s$
+\end_inset
+
+.
+ Обозначим 
+\begin_inset Formula $\tau:=\frac{d\gamma}{ds}$
+\end_inset
+
+, 
+\begin_inset Formula $\kappa:=\frac{d^{2}\gamma}{ds^{2}}$
+\end_inset
+
+ соответственно касательный вектор и вектор кривизны.
+ Пусть кривая имеет единичную длину, тогда: 
+\begin_inset Formula $\gamma_{s}=\gamma_{s+1}$
+\end_inset
+
+, 
+\begin_inset Formula $\tau_{s}=\tau_{s+1}$
+\end_inset
+
+, 
+\begin_inset Formula $\kappa_{s}=\kappa_{s+1}$
+\end_inset
+
+ 
+\begin_inset Formula $\forall s\in\mathbb{R}$
+\end_inset
+
+.
+ Необходимо найти 
+\begin_inset Formula $n-1$
+\end_inset
+
+ периодических гладких векторных полей 
+\begin_inset Formula $e_{s}^{1},e_{s}^{2},...,e_{s}^{n-1}:\mathbb{R}\to\mathbb{R}^{n}$
+\end_inset
+
+, которые в каждой точке кривой 
+\begin_inset Formula $\gamma_{s}$
+\end_inset
+
+ образуют ортонормированный базис ортогонального дополнения вектора 
+\begin_inset Formula $\tau_{s}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $e_{s}^{i}=e_{s+1}^{i}$
+\end_inset
+
+ 
+\begin_inset Formula $\forall s\in\mathbb{R}$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\left\langle e_{s}^{i}\vert e_{s}^{j}\right\rangle =\delta_{ij}$
+\end_inset
+
+
+\begin_inset Formula $\forall s\in\mathbb{R}$
+\end_inset
+
+, 
+\begin_inset Formula $\forall i,j\in1..n-1$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\left\langle \tau_{s}\vert e_{s}^{j}\right\rangle =0$
+\end_inset
+
+ 
+\begin_inset Formula $\forall s\in\mathbb{R}$
+\end_inset
+
+, 
+\begin_inset Formula $\forall j\in1..n-1$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $e_{s}^{i}\in C^{1}\left(\mathbb{R}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Построение базиса
+\end_layout
+
+\begin_layout Standard
+В силу того, что базисные вектора 
+\begin_inset Formula $e_{s}^{i}$
+\end_inset
+
+ вместе с касательным вектором 
+\begin_inset Formula $\tau_{s}$
+\end_inset
+
+ образуют ортонормированный базис, матричная функция
+\begin_inset Formula 
+\begin{eqnarray*}
+R_{s} & = & \left(\tau_{s},e_{s}^{1},e_{s}^{2},...,e_{s}^{n-1}\right)
+\end{eqnarray*}
+
+\end_inset
+
+является кривой на группе ортогональных матриц.
+ Кроме того, отражением вектора 
+\begin_inset Formula $e_{s}^{n-1}\mapsto-e_{s}^{n-1}$
+\end_inset
+
+ всегда можно добиться, чтобы 
+\begin_inset Formula $\det R_{s}=1$
+\end_inset
+
+, то есть: 
+\begin_inset Formula $R_{s}:\,\mathbb{R}\to SO\left(n\right)$
+\end_inset
+
+.
+ В этих терминах, задача поиска базисных векторов сводится к поиску кривой
+ 
+\begin_inset Formula $R_{s}$
+\end_inset
+
+, удовлетворяющей критериям:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $R_{s}$
+\end_inset
+
+: 
+\begin_inset Formula $C^{1}\left(\mathbb{R},SO\left(n\right)\right)$
+\end_inset
+
+; 
+\begin_inset CommandInset label
+LatexCommand label
+name "enu:R_prop_1"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\tau_{s}^{T}\cdot R_{s}=\left(1,0,0,...,0\right)$
+\end_inset
+
+ 
+\begin_inset Formula $\forall s\in\mathbb{R}$
+\end_inset
+
+; 
+\begin_inset CommandInset label
+LatexCommand label
+name "enu:R_prop_2"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $R_{s}=R_{s+1}$
+\end_inset
+
+ 
+\begin_inset Formula $\forall s\in\mathbb{R}$
+\end_inset
+
+.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "enu:R_prop_3"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Claim
+\begin_inset CommandInset label
+LatexCommand label
+name "claim:cauchy_problem"
+
+\end_inset
+
+ Решение 
+\begin_inset Formula $R_{s}$
+\end_inset
+
+ задачи Коши
+\begin_inset Formula 
+\begin{eqnarray*}
+\frac{d}{ds}R_{s} & = & \kappa\wedge\tau\cdot R_{s},\\
+R_{0} & \in & \left\{ R\in SO\left(n\right)\vert\tau_{0}R=\left(1,0,0,...,0\right)\right\} 
+\end{eqnarray*}
+
+\end_inset
+
+(здесь 
+\begin_inset Formula $\kappa\wedge\tau=\kappa\tau^{T}-\tau\kappa^{T}$
+\end_inset
+
+ -- внешнее произведение) удовлетворяет критериям 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "enu:R_prop_1"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "enu:R_prop_2"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Remark
+Для произвольной замкнутой кривой 
+\begin_inset Formula $\gamma_{s}$
+\end_inset
+
+ решение 
+\begin_inset Formula $R_{s}$
+\end_inset
+
+ не является периодическим: 
+\begin_inset Formula $R_{1}\ne R_{0}$
+\end_inset
+
+.
+ 
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Formula $\frac{d}{ds}R_{s}=\kappa\wedge\tau\cdot R_{s}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Formula $P_{s}T_{s}=R_{s}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Formula $\frac{d}{ds}P_{s}T_{s}=\kappa\wedge\tau\cdot P_{s}T_{s}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Formula $\frac{dP_{s}}{ds}T_{s}=\kappa\wedge\tau\cdot P_{s}T_{s}-P_{s}\frac{dT_{s}}{ds}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Formula $\frac{dP_{s}}{ds}=\kappa\wedge\tau\cdot P_{s}T_{s}T_{s}^{-1}-P_{s}\frac{dT_{s}}{ds}T_{s}^{-1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Formula $\frac{dP_{s}}{ds}=\kappa\wedge\tau\cdot P_{s}-P_{s}\frac{dT_{s}}{ds}T_{s}^{-1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang english
+---
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang english
+let 
+\begin_inset Formula $T_{s}=\exp\left\{ -s\log R_{1}^{T}R_{0}\right\} $
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Formula $\frac{dT_{s}}{ds}=-\log R_{1}^{T}R_{0}\exp\left\{ -s\log R_{1}^{T}R_{0}\right\} =-\log R_{1}^{T}R_{0}T_{s}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Formula $T_{s}^{-1}=\exp\left\{ s\log R_{1}^{T}R_{0}\right\} $
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang english
+---
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Formula $\frac{dP_{s}}{ds}=\kappa\wedge\tau\cdot P_{s}+P_{s}\cdot\log R_{1}^{T}R_{0}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Для найденного решения 
+\begin_inset Formula $R_{s}$
+\end_inset
+
+ определим матрицу 
+\begin_inset Formula $P_{s}$
+\end_inset
+
+ по правилу 
+\begin_inset Formula 
+\begin{eqnarray*}
+P_{s} & = & R_{s}\exp\left\{ s\log R_{1}^{T}R_{0}\right\} .
+\end{eqnarray*}
+
+\end_inset
+
+Здесь 
+\begin_inset Formula $\log\left\{ \cdot\right\} $
+\end_inset
+
+ -- матричный логарифм, a 
+\begin_inset Formula $\exp\left\{ \cdot\right\} $
+\end_inset
+
+ -- матричная экспонента.
+ В силу того, что аргументом матричного логарифма 
+\begin_inset Formula $R_{1}^{T}R_{0}$
+\end_inset
+
+ является матрица поворота, его значение определёно однозначно.
+ 
+\end_layout
+
+\begin_layout Claim
+\begin_inset CommandInset label
+LatexCommand label
+name "claim:solution"
+
+\end_inset
+
+ Кривая 
+\begin_inset Formula $P_{s}$
+\end_inset
+
+ удовлетворяет критериям 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "enu:R_prop_1"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "enu:R_prop_2"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "enu:R_prop_3"
+
+\end_inset
+
+, следовательно, определяет решение исходной задачи.
+\end_layout
+
+\begin_layout Proof
+Утверждения 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "claim:cauchy_problem"
+
+\end_inset
+
+.
+ Решением уравнения 
+\begin_inset Formula 
+\begin{eqnarray}
+\frac{d}{ds}R_{s} & = & \kappa\wedge\tau\cdot R_{s}\label{eq:dR}
+\end{eqnarray}
+
+\end_inset
+
+является функция 
+\begin_inset Formula $R_{s}=\exp\left\{ \int_{0}^{s}\kappa_{v}\wedge\tau_{v}dv\right\} R_{0}$
+\end_inset
+
+.
+ Матрица 
+\begin_inset Formula $R_{s}$
+\end_inset
+
+ принадлежит множеству 
+\begin_inset Formula $SO\left(n\right)$
+\end_inset
+
+ в силу того, что матрица 
+\begin_inset Formula $\kappa_{v}\wedge\tau_{v}$
+\end_inset
+
+ является кососимметричной и 
+\begin_inset Formula $R_{0}$
+\end_inset
+
+ принадлежит 
+\begin_inset Formula $SO\left(n\right)$
+\end_inset
+
+.
+ Уравнение 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:dR"
+
+\end_inset
+
+ имеет первый интеграл 
+\begin_inset Formula $I\left(R,s\right)=\tau_{s}^{T}R$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{eqnarray*}
+\frac{d}{ds}\tau_{s}^{T}R_{s} & = & \kappa_{s}^{T}R_{s}+\tau_{s}^{T}\frac{dR_{s}}{ds}\\
+ & = & \kappa_{s}^{T}R_{s}+\tau_{s}^{T}\left(\kappa\tau^{T}-\tau\kappa^{T}\right)R_{s}\\
+ & = & 0.
+\end{eqnarray*}
+
+\end_inset
+
+Значит, 
+\begin_inset Formula $\tau_{s}^{T}R_{s}=\tau_{0}^{T}R_{0}=\left(1,0,0,...,0\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Утверждения 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "claim:solution"
+
+\end_inset
+
+.
+ Для начала заметим, что матрица 
+\begin_inset Formula $R_{1}^{T}R_{0}$
+\end_inset
+
+ имеет следующую структуру
+\begin_inset Formula 
+\begin{eqnarray*}
+R_{1}^{T}R_{0} & = & \left(\begin{array}{cc}
+1 & 0_{1\times n-1}\\
+0_{n-1\times1} & X_{n-1\times n-1}
+\end{array}\right)
+\end{eqnarray*}
+
+\end_inset
+
+в силу того, что первые столбцы матриц 
+\begin_inset Formula $R_{0}$
+\end_inset
+
+ и 
+\begin_inset Formula $R_{1}$
+\end_inset
+
+ совпадают (т.к.
+ 
+\begin_inset Formula $\tau_{0}=\tau_{1}$
+\end_inset
+
+).
+ Следовательно, матрица 
+\begin_inset Formula $\Phi_{s}=\exp\left\{ s\log R_{1}^{T}R_{0}\right\} $
+\end_inset
+
+ тоже является матрицей поворота и имеет аналогичную структуру.
+ Значит, 
+\begin_inset Formula $P_{s}\in SO\left(n\right)$
+\end_inset
+
+ т.к.
+ является произведением матриц поворота и 
+\begin_inset Formula 
+\begin{eqnarray*}
+\tau^{T}P_{s} & = & \tau^{T}R_{s}\Phi_{s}=\left(1,0,0,...,0\right).
+\end{eqnarray*}
+
+\end_inset
+
+Периодичность матрицы 
+\begin_inset Formula $P_{s}$
+\end_inset
+
+ доказывается непосредственными вычислениями.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
