@@ -83,6 +83,18 @@ def rotmat_sqrt(R):
     return Q.dot(sqrt_B).dot(Q.T)
 
 
+def rotmat_pow(R, k):
+    dim = R.shape[0]
+    Q,B = rotmat_decompose_QBQt(R)
+    sqrt_B = np.eye(dim, dtype=float)
+
+    for i in range(dim//2):
+        theta = rotmat2d_angle(B[2*i:2*i+2,2*i:2*i+2])
+        sqrt_B[2*i:2*i+2,2*i:2*i+2] = rotmat2d(theta * k)
+
+    return Q.dot(sqrt_B).dot(Q.T)
+
+
 def rotmat_logm(R):
     e,V = np.linalg.eig(R)
     if np.any(np.isclose(e, -1)):
@@ -128,7 +140,16 @@ def test_logm():
         assert np.allclose(R - expm(2*log_sqrt_R), 0)
 
 
+def test_pow():
+    np.random.seed(0)
+    k = 0.1254236
+    R = gen_rand_rotmat(6)
+    Rk = rotmat_pow(R, k)
+    Rk2 = expm(k*logm(R))
+    np.allclose(Rk, Rk2)
+
+
 if __name__ == '__main__':
     np.set_printoptions(suppress=True, linewidth=200)
-    test_logm()
+    test_pow()
 
