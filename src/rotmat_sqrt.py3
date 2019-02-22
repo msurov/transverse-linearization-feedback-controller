@@ -27,8 +27,16 @@ def nullspace(A, eps=1e-10):
     m = s < eps
     i, = np.nonzero(m)
     v = np.conj(Vt[i,:]).T
-    assert np.allclose(A.dot(v), 0)
+    assert np.allclose(A @ v, 0)
     return v
+
+
+def remove_duplicates(_v):
+    v = _v[:]
+    v.sort()
+    duplicates = np.isclose(np.diff(v), 0)
+    duplicates = np.append(duplicates,False)
+    return v[~duplicates]
 
 
 def rotmat_decompose_QBQt(R):
@@ -42,7 +50,6 @@ def rotmat_decompose_QBQt(R):
     real_eigvals = np.real(eigvals[real_idx])
     comp_idx, = np.nonzero(~m)
     comp_eigvals = eigvals[comp_idx]
-    comp_eigvals = comp_eigvals[np.imag(comp_eigvals) > 0]
 
     # 1. basis of eigval 1
     basis_plus = np.zeros((dim,0))
@@ -56,16 +63,26 @@ def rotmat_decompose_QBQt(R):
 
     # 3. basis of conj eigvals
     basis_comp = np.zeros((dim,0))
+    comp_eigvals = comp_eigvals[np.imag(comp_eigvals) > 0]
+    comp_eigvals = remove_duplicates(comp_eigvals)
 
     for e in comp_eigvals:
         vecs = nullspace(R - e * I)
-        vecs1 = np.real((vecs + np.conj(vecs)) / np.sqrt(2))
-        vecs2 = np.real((vecs - np.conj(vecs)) / np.complex(0, np.sqrt(2)))
-        basis_comp = np.concatenate((basis_comp, vecs1, vecs2), axis=1)
+        for v in vecs.T:
+            v = np.reshape(v, (dim,1))
+            v1 = np.real((v + np.conj(v)) / np.sqrt(2))
+            v2 = np.real((v - np.conj(v)) / np.complex(0, np.sqrt(2)))
+            basis_comp = np.concatenate([basis_comp, v1, v2], axis=1)
+
 
     # 4. total basis
     Q = np.concatenate((basis_comp, basis_minus, basis_plus), axis=1)
-    B = Q.T.dot(R).dot(Q)
+    if np.isclose(np.linalg.det(Q), -1):
+        Q[:,[0,1]] =  Q[:,[1,0]]
+    assert np.allclose(np.linalg.det(Q), 1)
+
+    B = Q.T @ R @ Q
+    assert np.allclose(R, Q @ B @ Q.T)
 
     # be sure B is block diagonal
     for i in range(dim//2):
@@ -76,9 +93,6 @@ def rotmat_decompose_QBQt(R):
 
     if dim % 2 == 1:
         assert np.isclose(B[-1,-1], 1)
-
-    assert np.allclose(R, Q.dot(B).dot(Q.T))
-    assert np.allclose(np.linalg.det(Q), 1)
 
     return Q,B
 
@@ -92,7 +106,7 @@ def rotmat_sqrt(R):
         theta = rotmat2d_angle(B[2*i:2*i+2,2*i:2*i+2])
         sqrt_B[2*i:2*i+2,2*i:2*i+2] = rotmat2d(theta/2)
 
-    return Q.dot(sqrt_B).dot(Q.T)
+    return Q @ sqrt_B @ Q.T
 
 
 def rotmat_pow(R, k):
@@ -104,7 +118,7 @@ def rotmat_pow(R, k):
         theta = rotmat2d_angle(B[2*i:2*i+2,2*i:2*i+2])
         sqrt_B[2*i:2*i+2,2*i:2*i+2] = rotmat2d(theta * k)
 
-    return Q.dot(sqrt_B).dot(Q.T)
+    return Q @ sqrt_B @ Q.T
 
 
 def rotmat_logm(R):
@@ -131,7 +145,7 @@ def gen_rotmat(angles):
         B[2*i:2*i+2,2*i:2*i+2] = rotmat2d(a)
 
     O = gen_rand_rotmat(dim)
-    return O.dot(B).dot(O.T)
+    return O @ B @ O.T
 
 
 def test_rotmat_sqrt():
@@ -140,7 +154,7 @@ def test_rotmat_sqrt():
         R = gen_rotmat([np.pi, np.pi/2, 0, 2, 0, np.pi])
         # R = gen_rand_rotmat(7)
         sqrt_R = rotmat_sqrt(R)
-        assert np.allclose(sqrt_R.dot(sqrt_R) - R, 0)
+        assert np.allclose(sqrt_R @ sqrt_R, R)
 
 
 def test_logm():
@@ -162,10 +176,11 @@ def test_pow():
 
 
 def test_rotmat_sqrt2():
-    np.random.seed(0)
-    R = gen_rotmat([2, 0, 2, 1])
-    sqrt_R = rotmat_sqrt(R)
-    assert np.allclose(sqrt_R.dot(sqrt_R) - R, 0)
+    for i in range(100):
+        np.random.seed(i)
+        R = gen_rotmat([2, 1, np.pi, 2, 0])
+        sqrt_R = rotmat_sqrt(R)
+        assert np.allclose(sqrt_R @ sqrt_R, R)
 
 
 if __name__ == '__main__':
