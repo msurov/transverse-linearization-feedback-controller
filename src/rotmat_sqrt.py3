@@ -66,7 +66,19 @@ def rotmat_decompose_QBQt(R):
     # 4. total basis
     Q = np.concatenate((basis_comp, basis_minus, basis_plus), axis=1)
     B = Q.T.dot(R).dot(Q)
-    assert np.allclose(R - Q.dot(B).dot(Q.T), 0.)
+
+    # be sure B is block diagonal
+    for i in range(dim//2):
+        assert(np.allclose(B[2*i,:2*i], 0)), 'failed'
+        assert(np.allclose(B[2*i,2*i+2:], 0)), 'failed'
+        assert(np.allclose(B[2*i+1,:2*i], 0)), 'failed'
+        assert(np.allclose(B[2*i+1,2*i+2:], 0)), 'failed'
+
+    if dim % 2 == 1:
+        assert np.isclose(B[-1,-1], 1)
+
+    assert np.allclose(R, Q.dot(B).dot(Q.T))
+    assert np.allclose(np.linalg.det(Q), 1)
 
     return Q,B
 
@@ -149,7 +161,13 @@ def test_pow():
     np.allclose(Rk, Rk2)
 
 
+def test_rotmat_sqrt2():
+    np.random.seed(0)
+    R = gen_rotmat([2, 0, 2, 1])
+    sqrt_R = rotmat_sqrt(R)
+    assert np.allclose(sqrt_R.dot(sqrt_R) - R, 0)
+
+
 if __name__ == '__main__':
     np.set_printoptions(suppress=True, linewidth=200)
-    test_pow()
-
+    test_rotmat_sqrt2()
