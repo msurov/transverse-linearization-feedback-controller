@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
-from misc.math import integrate
+from misc.math.math import integrate
 from scipy.linalg import expm, logm
 from time import time
 

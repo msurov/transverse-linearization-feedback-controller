@@ -1,7 +1,6 @@
 import numpy as np
 from scipy.linalg import logm, expm
 
-
 def is_real(v, eps):
     return np.all(np.abs(np.imag(v)) < eps)
 
@@ -234,9 +233,37 @@ def test_rotmat_sqrt2():
         assert np.allclose(sqrt_R @ sqrt_R, R)
 
 
+def test_continuity():
+    for i in range(100):
+        np.random.seed(i)
+        R = gen_rotmat([2, 1, 0, 3, 0, np.pi])
+        step = 1e-2
+        curve = [rotmat_pow(R, k) for k in np.arange(0, 1, step)]
+        dist = np.array([np.linalg.norm(curve[i] - curve[i+1]) for i in range(0,len(curve)-1)])
+        assert np.all(dist < 10 * step)
+
+    for i in range(100):
+        np.random.seed(i)
+        R = gen_rotmat([2, 1, 2, 3, 3, np.pi])
+        step = 1e-2
+        curve = [rotmat_pow(R, k) for k in np.arange(0, 1, step)]
+        dist = np.array([np.linalg.norm(curve[i] - curve[i+1]) for i in range(0,len(curve)-1)])
+        assert np.all(dist < 10 * step)
+
+    for i in range(100):
+        np.random.seed(i)
+        R = gen_rand_rotmat(7)
+        step = 1e-2
+        curve = [rotmat_pow(R, k) for k in np.arange(0, 1, step)]
+        dist = np.array([np.linalg.norm(curve[i] - curve[i+1]) for i in range(0,len(curve)-1)])
+        assert np.all(dist < 10 * step)
+
+
 if __name__ == '__main__':
     np.set_printoptions(suppress=True, linewidth=200)
     test_rotmat_sqrt()
     test_rotmat_sqrt2()
     test_log()
     test_pow()
+    test_continuity()
+
