@@ -114,7 +114,8 @@ figs-within-sections
 \end_inset
 
  соответственно касательный вектор и вектор кривизны.
- Пусть кривая имеет единичную длину, тогда: 
+ Пусть кривая имеет единичную длину, тогда условие периодичности запишется
+ как: 
 \begin_inset Formula $\gamma_{s}=\gamma_{s+1}$
 \end_inset
 
@@ -228,11 +229,11 @@ R_{s} & = & \left(\tau_{s},e_{s}^{1},e_{s}^{2},...,e_{s}^{n-1}\right)
 \begin_inset Formula $\det R_{s}=1$
 \end_inset
 
-, то есть: 
+, тогда: 
 \begin_inset Formula $R_{s}:\,\mathbb{R}\to SO\left(n\right)$
 \end_inset
 
-.
+ – матрица поворота.
  В этих терминах, задача поиска базисных векторов сводится к поиску кривой
  
 \begin_inset Formula $R_{s}$
@@ -464,37 +465,85 @@ let
 \end_layout
 
 \begin_layout Standard
-Для найденного решения 
-\begin_inset Formula $R_{s}$
+В случае, когда все собственные числа матрицы 
+\begin_inset Formula $R_{1}^{T}R_{0}$
 \end_inset
 
- определим матрицу 
-\begin_inset Formula $P_{s}$
+ отличны от 
+\begin_inset Formula $-1$
 \end_inset
 
- по правилу 
+, матричный логарифм 
+\begin_inset Formula $\log R_{1}^{T}R_{0}$
+\end_inset
+
+ является кососиммерической вещественной матрицей
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Если матрица 
+\begin_inset Formula $R_{1}^{T}R_{0}$
+\end_inset
+
+ имеет собственные числа равные 
+\begin_inset Formula $-1$
+\end_inset
+
+, то функцию 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ можно определить как 
+\begin_inset Formula $\Psi\left(s\right):=\exp\left\{ 2s\log X\right\} $
+\end_inset
+
+, где 
+\begin_inset Formula $X$
+\end_inset
+
+ – одно из решений уравнения 
+\begin_inset Formula $XX=R_{1}^{T}R_{0}$
+\end_inset
+
+, все собственные числа которого отличны от 
+\begin_inset Formula $-1$
+\end_inset
+
+.
+ Легко показать, используя блочно-диагональное разложение, что такое решение
+ всегда существует.
+\end_layout
+
+\end_inset
+
+.
+ Это позволяет ввести в рассмотрение матричную функцию
 \begin_inset Formula 
 \begin{eqnarray*}
-P_{s} & = & R_{s}\exp\left\{ s\log R_{1}^{T}R_{0}\right\} .
+\Psi_{s} & := & \exp\left\{ s\log R_{1}^{T}R_{0}\right\} ,
 \end{eqnarray*}
 
 \end_inset
 
-Здесь 
-\begin_inset Formula $\log\left\{ \cdot\right\} $
-\end_inset
-
- – матричный логарифм, a 
+где 
 \begin_inset Formula $\exp\left\{ \cdot\right\} $
 \end_inset
 
  – матричная экспонента.
- В силу того, что аргументом матричного логарифма 
-\begin_inset Formula $R_{1}^{T}R_{0}$
+ Рассмотрим кривую 
+\begin_inset Formula $P_{s}$
 \end_inset
 
- является матрица поворота, его значение определёно однозначно.
- 
+, определённую как 
+\begin_inset Formula 
+\begin{eqnarray*}
+P_{s} & := & R_{s}\Psi_{s}.
+\end{eqnarray*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Claim
@@ -529,7 +578,7 @@ reference "enu:R_prop_3"
 
 \end_inset
 
-, следовательно, определяет решение исходной задачи.
+, следовательно, является решением исходной задачи.
 \end_layout
 
 \begin_layout Proof
@@ -649,7 +698,7 @@ R_{1}^{T}R_{0} & = & \left(\begin{array}{cc}
 
 ).
  Следовательно, матрица 
-\begin_inset Formula $\Phi_{s}=\exp\left\{ s\log R_{1}^{T}R_{0}\right\} $
+\begin_inset Formula $\Psi_{s}$
 \end_inset
 
  тоже является матрицей поворота и имеет аналогичную структуру.
