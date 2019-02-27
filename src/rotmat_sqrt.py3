@@ -149,30 +149,69 @@ def gen_rotmat(angles):
 
 
 def test_rotmat_sqrt():
-    for i in range(1000):
+    for i in range(100):
         np.random.seed(i)
         R = gen_rotmat([np.pi, np.pi/2, 0, 2, 0, np.pi])
-        # R = gen_rand_rotmat(7)
+        sqrt_R = rotmat_sqrt(R)
+        assert np.allclose(sqrt_R @ sqrt_R, R)
+
+    for i in range(100):
+        np.random.seed(i)
+        R = gen_rotmat([np.pi, 1,2,3,2,1,2,1,0])
+        sqrt_R = rotmat_sqrt(R)
+        assert np.allclose(sqrt_R @ sqrt_R, R)
+
+    for i in range(100):
+        np.random.seed(i)
+        R = gen_rotmat([np.pi,1,0,3,0,1,2,1,0])
+        sqrt_R = rotmat_sqrt(R)
+        assert np.allclose(sqrt_R @ sqrt_R, R)
+
+    for i in range(100):
+        np.random.seed(i)
+        R = gen_rand_rotmat(11)
         sqrt_R = rotmat_sqrt(R)
         assert np.allclose(sqrt_R @ sqrt_R, R)
 
 
-def test_logm():
-    for i in range(1000):
+def test_log():
+    for i in range(100):
         np.random.seed(i)
         R = gen_rotmat([np.pi, np.pi/2, 0, 2, 0, np.pi])
         sqrt_R = rotmat_sqrt(R)
         log_sqrt_R = logm(sqrt_R)
-        assert np.allclose(R - expm(2*log_sqrt_R), 0)
+        assert np.allclose(R, expm(2*log_sqrt_R))
 
+    for i in range(100):
+        np.random.seed(i)
+        R = gen_rotmat([1,2,3,2,2,1,2])
+        sqrt_R = rotmat_sqrt(R)
+        log_sqrt_R = logm(sqrt_R)
+        assert np.allclose(R, expm(2*log_sqrt_R))
+
+    for i in range(100):
+        np.random.seed(i)
+        R = gen_rand_rotmat(9)
+        sqrt_R = rotmat_sqrt(R)
+        log_sqrt_R = logm(sqrt_R)
+        assert np.allclose(R, expm(2*log_sqrt_R))
 
 def test_pow():
-    np.random.seed(0)
-    k = 0.1254236
-    R = gen_rand_rotmat(6)
-    Rk = rotmat_pow(R, k)
-    Rk2 = expm(k*logm(R))
-    np.allclose(Rk, Rk2)
+    for i in range(100):
+        np.random.seed(i)
+        k, = np.random.random(1)
+        R = gen_rand_rotmat(6)
+        Rk = rotmat_pow(R, k)
+        Rk2 = expm(k*logm(R))
+        assert np.allclose(Rk, Rk2)
+
+    for i in range(100):
+        np.random.seed(i)
+        k, = np.random.random(1)
+        R = gen_rotmat([1,2,3,2,0,2])
+        Rk = rotmat_pow(R, k)
+        Rk2 = expm(k*logm(R))
+        assert np.allclose(Rk, Rk2)
 
 
 def test_rotmat_sqrt2():
@@ -182,7 +221,22 @@ def test_rotmat_sqrt2():
         sqrt_R = rotmat_sqrt(R)
         assert np.allclose(sqrt_R @ sqrt_R, R)
 
+    for i in range(100):
+        np.random.seed(i)
+        R = gen_rotmat([2, 0, np.pi, 0, 0])
+        sqrt_R = rotmat_sqrt(R)
+        assert np.allclose(sqrt_R @ sqrt_R, R)
+
+    for i in range(100):
+        np.random.seed(i)
+        R = gen_rotmat([2, 0, np.pi, 1, np.pi])
+        sqrt_R = rotmat_sqrt(R)
+        assert np.allclose(sqrt_R @ sqrt_R, R)
+
 
 if __name__ == '__main__':
     np.set_printoptions(suppress=True, linewidth=200)
+    test_rotmat_sqrt()
     test_rotmat_sqrt2()
+    test_log()
+    test_pow()
