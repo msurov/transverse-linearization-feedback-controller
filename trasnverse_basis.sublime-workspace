@@ -1,0 +1,673 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"R",
+				"Rwd"
+			],
+			[
+				"the",
+				"theta"
+			],
+			[
+				"wr",
+				"world"
+			],
+			[
+				"w",
+				"w_self"
+			],
+			[
+				"te",
+				"templs"
+			],
+			[
+				"filter",
+				"filter_robot"
+			],
+			[
+				"sqrt",
+				"rotmat_sqrt"
+			],
+			[
+				"PX",
+				"PX4_ERR"
+			],
+			[
+				"cl",
+				"color"
+			],
+			[
+				"def",
+				"default_config"
+			],
+			[
+				"mak",
+				"masks"
+			],
+			[
+				"file",
+				"filepath"
+			],
+			[
+				"cont",
+				"continue"
+			],
+			[
+				"c",
+				"connections"
+			],
+			[
+				"connec",
+				"connectedComponents"
+			],
+			[
+				"thre",
+				"threshold"
+			],
+			[
+				"show",
+				"showgray"
+			],
+			[
+				"plot_pl",
+				"plot_plane"
+			],
+			[
+				"connected",
+				"connected_x"
+			],
+			[
+				"pc",
+				"pcnt2"
+			],
+			[
+				"sho",
+				"showgray"
+			],
+			[
+				"n",
+				"ninliers"
+			],
+			[
+				"mas",
+				"mask_cr"
+			],
+			[
+				"depth",
+				"depth_cr"
+			],
+			[
+				"fit_",
+				"fit_plane"
+			],
+			[
+				"de",
+				"depth_cr"
+			],
+			[
+				"logR",
+				"logR1"
+			],
+			[
+				"li",
+				"linalg"
+			],
+			[
+				"to",
+				"touint8"
+			],
+			[
+				"proce",
+				"process_img"
+			],
+			[
+				"obj_",
+				"obj_mask"
+			],
+			[
+				"log",
+				"log_RnR0"
+			],
+			[
+				"tan",
+				"taun"
+			],
+			[
+				"msk",
+				"mask"
+			],
+			[
+				"mask",
+				"masks"
+			],
+			[
+				"split",
+				"splitext"
+			],
+			[
+				"img",
+				"img_list"
+			],
+			[
+				"im",
+				"import"
+			],
+			[
+				"in",
+				"inliers"
+			],
+			[
+				"best",
+				"best_sample"
+			],
+			[
+				"max",
+				"maxiter"
+			],
+			[
+				"blu",
+				"blur_sz"
+			],
+			[
+				"dbg",
+				"dbgimsave"
+			],
+			[
+				"bo",
+				"borderType"
+			],
+			[
+				"co",
+				"copy"
+			],
+			[
+				"cor",
+				"corner_sz"
+			],
+			[
+				"fil",
+				"filtered"
+			],
+			[
+				"blur",
+				"blur_weighted"
+			],
+			[
+				"fitr_",
+				"fit_cylinder"
+			],
+			[
+				"json",
+				"jsonload"
+			],
+			[
+				"sam",
+				"samples"
+			],
+			[
+				"parse",
+				"parse_args"
+			],
+			[
+				"test",
+				"test_cont_perim"
+			],
+			[
+				"test_",
+				"test_filter"
+			],
+			[
+				"fit",
+				"fit_filter"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "Packages/Python 3/Python3.sublime-build",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				],
+				[
+					"Packages/Python 3/Python3.Optimized.sublime-build",
+					""
+				],
+				[
+					"Packages/Python 3/Python3.sublime-build",
+					""
+				]
+			],
+			[
+				"Packages/Python 3/Python3.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"Package Control: insta",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: instal",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 498.0,
+		"history":
+		[
+			"dir()",
+			"exit()",
+			"ls",
+			"import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/maksim/research/transverse_basis",
+		"/home/maksim/research/transverse_basis/src"
+	],
+	"file_history":
+	[
+		"/home/maksim/research/drone_dynamics/src/angular_velocity.py3",
+		"/home/maksim/research/transverse_basis/src/transverse_basis.py3",
+		"/home/maksim/research/drone_dynamics/src/screw.py",
+		"/home/maksim/research/transverse_basis/src/test_symbols.py3",
+		"/etc/apt/sources.list",
+		"/usr/local/lib/python2.7/dist-packages/mpl_toolkits/mplot3d/axes3d.py",
+		"/usr/local/lib/python2.7/dist-packages/matplotlib/__init__.py",
+		"/usr/local/lib/python2.7/dist-packages/matplotlib/axes/_axes.py",
+		"/usr/local/lib/python2.7/dist-packages/matplotlib/axes/_base.py",
+		"/home/maksim/research/transverse_basis/src/rotmat.py3",
+		"/home/maksim/dev/gripper-ros/logs/log important.txt",
+		"/home/maksim/dev/gripper-ros/ros_workspace/devel/lib/python2.7/dist-packages/nomagic_source/msg/_Barcodes.py",
+		"/home/maksim/dev/gripper-ros/src/nomagic_source/ros_nodes/nomagic/task/scan_objects/scan_image_manager.py",
+		"/home/maksim/dev/gripper-ros/src/nomagic_source/ros_nodes/nomagic/sensors/cognex_bridge.py",
+		"/home/maksim/dev/gripper-ros/src/nomagic_source/ros_nodes/nomagic/calibration/data_manager.py",
+		"/home/maksim/dev/gripper-ros/src/nomagic_source/ros_nodes/nomagic/robot_log_history/_robot_log_history.py",
+		"/home/maksim/dev/gripper-ros/src/nomagic_source/ros_nodes/nomagic/robot_log_history/time_offset.py",
+		"/home/maksim/dev/gripper-ros/src/nomagic_source/ros_nodes/nomagic/calibration/calibrate_robot_test.py",
+		"/home/maksim/dev/gripper-ros/src/nomagic_source/ros_nodes/nomagic/calibration/chessboard.py",
+		"/home/maksim/dev/gripper-ros/results/tmp/samples.json",
+		"/home/maksim/dev/gripper-ros/src/nomagic_source/ros_nodes/nomagic/calibration/calibrate_robot_tester.py",
+		"/home/maksim/dev/gripper-ros/src/rosrunner/scenarios/calibrate_base.py",
+		"/home/maksim/dev/gripper-ros/src/rosrunner/scenarios/all_nodes.py",
+		"/home/maksim/dev/gripper-ros/src/nomagic_source/ros_nodes/nomagic/calibration/calibrate.py",
+		"/home/maksim/dev/gripper-ros/src/run_simulation.bash",
+		"/home/maksim/dev/gripper-ros/logs/log cleared.txt",
+		"/home/maksim/dev/gripper-ros/src/rosrunner/common/wait_manager.py",
+		"/home/maksim/dev/gripper-ros/src/nomagic_source/ros_nodes/nomagic/robot_log_history/tail_tester.py",
+		"/home/maksim/dev/gripper-ros/src/nomagic_source/ros_nodes/nomagic/task/task.py",
+		"/home/maksim/dev/gripper-ros/src/nomagic_source/ros_nodes/nomagic/robot_log_history/robot_log_history_tester.py",
+		"/home/maksim/dev/gripper-ros/src/nomagic_source/ros_nodes/nomagic/task/suction/suction_test.py",
+		"/home/maksim/dev/gripper-ros/src/nomagic_source/ros_nodes/nomagic/robot_log_history/robot_log_history_test.py",
+		"/home/maksim/Downloads/Telegram Desktop/RigWorks.ipynb",
+		"/home/maksim/dev/gripper-ros/src/rosrunner/setup/cameras.py",
+		"/home/maksim/dev/gripper-ros/src/rosrunner/scenarios/scenario_base.py",
+		"/home/maksim/dev/gripper-ros/scripts/parse_logfile.py",
+		"/home/maksim/dev/px4/readme.txt",
+		"/home/maksim/dev/gripper-ros/logs/download.sh",
+		"/home/maksim/dev/gripper-ros/logs/log.json",
+		"/home/maksim/dev/gripper-ros/scripts/test.py",
+		"/home/maksim/dev/arrival/px4/Makefile",
+		"/home/maksim/dev/arrival/px4/make",
+		"/home/maksim/dev/gripper-ros/logs/log.csv",
+		"/home/maksim/Downloads/ruspb-vpn-limited.arrival.co-msurov.ovpn",
+		"/home/maksim/dev/gripper-ros/gripper-ros.sublime-workspace",
+		"/home/maksim/dev/gripper-ros/src/nomagic_source/ros_nodes/nomagic/task/suction/suction.py",
+		"/home/maksim/dev/gripper-ros/src/nomagic_source/ros_nodes/nomagic/calibration/calibrate_robot.py",
+		"/home/maksim/dev/tools/nomagic-logs.py",
+		"/home/maksim/dev/gripper-ros/src/nomagic_source/ros_nodes/nomagic/saved_metrics.py",
+		"/home/maksim/dev/gripper-ros/logs/log.txt",
+		"/home/maksim/dev/gripper-ros/src/tmp.py",
+		"/home/maksim/dev/gripper-ros/logs/download.py",
+		"/home/maksim/dev/gripper-ros/logs/project__logs__2019-02-21T09-05.csv",
+		"/home/maksim/dev/tools/log.txt",
+		"/home/maksim/dev/tools/nomagic-structured-logs.py",
+		"/home/maksim/dev/gripper-ros/logs/logs.txt",
+		"/home/maksim/dev/gripper-ros/src/nomagic_source/ros_nodes/nomagic/tools/gcs_utils.py",
+		"/home/maksim/dev/gripper-ros/src/nomagic_source/ros_nodes/nomagic/sensors/realsense.py",
+		"/home/maksim/dev/gripper-ros/src/nomagic_source/ros_nodes/nomagic/camera_calibration_downloader.py",
+		"/home/maksim/dev/gripper-ros/scripts/download_from_gcs.py",
+		"/home/maksim/dev/gripper-ros/myke",
+		"/home/maksim/dev/gripper-ros/logs/project__logs__2019-02-21T02-19.csv",
+		"/home/maksim/Downloads/project__logs__2019-02-21T02-19.csv",
+		"/home/maksim/Downloads/project__logs__2019-02-21T09-05.csv",
+		"/home/maksim/Downloads/project__logs__2019-02-21T09-06 (1).csv",
+		"/home/maksim/Downloads/project__logs__2019-02-21T09-06.csv",
+		"/home/maksim/dev/gripper-ros/srcipts/parse_logfile.py",
+		"/home/maksim/dev/gripper-ros/logs/project__logs__2019-02-21T09-06.csv",
+		"/home/maksim/dev/gripper-ros/src/nomagic_source/ros_nodes/nomagic/task/suction/predict/suction_predict.py",
+		"/home/maksim/Downloads/project__logs__2019-02-21T09-06.json",
+		"/home/maksim/dev/Athena/4/grasp_failures.csv",
+		"/home/maksim/dev/Athena/4/comment.txt",
+		"/home/maksim/dev/gripper-ros/src/nomagic_source/ros_nodes/nomagic/task/common.py",
+		"/home/maksim/dev/gripper-ros/src/nomagic_source/ros_nodes/nomagic/task/suction/predict/detect_empty_cart.py",
+		"/home/maksim/dev/gripper-ros/src/rosrunner/voyages/model_017/Calibrate.py",
+		"/home/maksim/dev/gripper-ros/src/rosrunner/voyages/model_016/Calibrate.py",
+		"/home/maksim/Downloads/build_17904_step_103_container_0.txt",
+		"/home/maksim/dev/px4/src/drivers/pwm_out_sim/PWMSim.hpp",
+		"/home/maksim/dev/px4/src/modules/uORB/uORB.h",
+		"/home/maksim/dev/px4/src/modules/vtol_att_control/vtol_att_control_main.cpp",
+		"/home/maksim/dev/px4/src/modules/vtol_att_control/vtol_att_control_main.h",
+		"/home/maksim/dev/px4/build/px4_sitl_default/msg/tmp/headers/actuator_controls.h",
+		"/home/maksim/dev/px4/src/modules/simulator/simulator.cpp",
+		"/home/maksim/dev/px4/src/drivers/mkblctrl/mkblctrl.cpp",
+		"/home/maksim/dev/px4/src/drivers/mkblctrl/CMakeLists.txt",
+		"/home/maksim/dev/px4/Tools/sitl_gazebo/src/gazebo_motor_model.cpp",
+		"/home/maksim/dev/px4/Tools/sitl_gazebo/src/gazebo_controller_interface.cpp",
+		"/home/maksim/dev/px4/src/examples/uuv_example_app/uuv_example_app.cpp",
+		"/home/maksim/dev/px4/src/modules/vtol_att_control/standard.cpp",
+		"/home/maksim/dev/px4/src/modules/vtol_att_control/tiltrotor.cpp",
+		"/home/maksim/dev/px4/src/modules/vtol_att_control/vtol_type.cpp",
+		"/home/maksim/dev/px4/src/modules/fw_att_control/FixedwingAttitudeControl.cpp",
+		"/home/maksim/dev/px4/src/examples/uuv_example_app/CMakeLists.txt",
+		"/home/maksim/dev/px4/ROMFS/px4fmu_common/init.d/rc.vtol_apps",
+		"/home/maksim/dev/px4/boards/px4/sitl/default.cmake",
+		"/home/maksim/dev/px4/src/drivers/px4io/px4io.cpp",
+		"/home/maksim/dev/px4/src/drivers/linux_pwm_out/linux_pwm_out.cpp",
+		"/home/maksim/dev/px4/build/px4_sitl_default/src/systemcmds/topic_listener/listener_generated.cpp",
+		"/home/maksim/dev/px4/build/px4_sitl_default/msg/topics_sources/actuator_controls.cpp",
+		"/home/maksim/dev/px4/build/px4_sitl_default/msg/tmp/sources/actuator_controls.cpp",
+		"/home/maksim/dev/px4/boards/beaglebone/blue/bbblue_adc/bbblue_adc.cpp",
+		"/home/maksim/dev/px4/src/platforms/px4_log.h",
+		"/home/maksim/dev/px4/build/px4_sitl_default/msg/tmp/sources/actuator_armed.cpp",
+		"/home/maksim/dev/px4/src/examples/test_control/main.cpp",
+		"/home/maksim/dev/px4/src/examples/fixedwing_control/main.cpp",
+		"/home/maksim/dev/px4/build/px4_sitl_default/platforms/posix/apps.cpp",
+		"/home/maksim/dev/px4/build/px4_sitl_default/msg/tmp/headers/actuator_armed.h",
+		"/home/maksim/dev/px4/build/px4_sitl_default/msg/tmp/headers/actuator_outputs.h",
+		"/home/maksim/dev/px4/build/px4_sitl_default/msg/tmp/headers/actuator_direct.h",
+		"/home/maksim/dev/gripper-ros/src/nomagic_source/ros_nodes/nomagic/task/suction/predict/detect_empty_cart_test.py",
+		"/home/maksim/dev/gripper-ros/src/nomagic_source/ros_nodes/nomagic/task/suction/predict/detect_empty_cart_tester.py",
+		"/home/maksim/dev/gripper-ros/src/nomagic_source/ros_nodes/nomagic/task/suction/predict/grasp_predictor_api_test.py",
+		"/home/maksim/dev/gripper-ros/src/nomagic_source/ros_nodes/nomagic/task/suction/predict/suction_predict_test.py",
+		"/home/maksim/dev/gripper-ros/src/nomagic_source/ros_nodes/nomagic/task/suction/predict/image_suction_client.py",
+		"/home/maksim/dev/Athena/man.txt",
+		"/home/maksim/dev/Athena/tools/process_athena_data.py",
+		"/home/maksim/dev/gripper-ros/src/nomagic_source/ros_nodes/nomagic/task/suction/predict/cvmisc.py",
+		"/home/maksim/dev/gripper-ros/src/nomagic_source/ros_nodes/nomagic/task/suction/predict/cart_prediction.png",
+		"/home/maksim/dev/Athena/main.py",
+		"/home/maksim/dev/precitor/src/fit_masked.py",
+		"/home/maksim/dev/precitor/src/predictor.py",
+		"/home/maksim/research/transverse_basis/src/transverse_basis.py",
+		"/home/maksim/research/transverse_basis/src/singularities_in_logm.py",
+		"/home/maksim/Downloads/lines3d_demo (2).py",
+		"/home/maksim/Downloads/surface3d_demo.py",
+		"/home/maksim/dev/precitor/src/cvmisc.py",
+		"/home/maksim/dev/transverse_basis/src/transverse_basis.py",
+		"/home/maksim/dev/precitor/src/pick_mask.py"
+	],
+	"find":
+	{
+		"height": 50.0
+	},
+	"find_in_files":
+	{
+		"height": 799.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"plot_vector_field",
+			"plot"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"folders":
+	[
+		{
+			"path": "/home/maksim/research/transverse_basis"
+		}
+	],
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 38.0
+	},
+	"input":
+	{
+		"height": 253.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 277.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "",
+	"replace":
+	{
+		"height": 72.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"caloibrate.py",
+				"src/nomagic_source/ros_nodes/nomagic/calibration/calibrate.py"
+			],
+			[
+				"tail.py",
+				"src/nomagic_source/ros_nodes/nomagic/robot_log_history/tail.py"
+			],
+			[
+				"run_simulation.bash",
+				"src/run_simulation.bash"
+			],
+			[
+				"suction_test.",
+				"src/nomagic_source/ros_nodes/nomagic/task/suction/suction_test.py"
+			],
+			[
+				"calib",
+				"src/nomagic_source/ros_nodes/nomagic/calibration/calibrate.py"
+			],
+			[
+				"tmp.py",
+				"src/tmp.py"
+			],
+			[
+				"calibrate.py",
+				"src/nomagic_source/ros_nodes/nomagic/calibration/calibrate.py"
+			],
+			[
+				"calibrate",
+				"src/rosrunner/scenarios/calibrate_base.py"
+			],
+			[
+				"calibrat",
+				"src/rosrunner/scenarios/calibrate_base.py"
+			],
+			[
+				"calibra",
+				"src/rosrunner/voyages/model_017/Calibrate.py"
+			],
+			[
+				"empty",
+				"src/nomagic_source/ros_nodes/nomagic/task/suction/predict/detect_empty_cart.py"
+			],
+			[
+				"rc.vtol_apps",
+				"ROMFS/px4fmu_common/init.d/rc.vtol_apps"
+			],
+			[
+				"pwm_out_sim",
+				"src/drivers/pwm_out_sim/PWMSim.cpp"
+			],
+			[
+				"simulator",
+				"src/modules/simulator/simulator.cpp"
+			],
+			[
+				"gazebo mtor",
+				"Tools/sitl_gazebo/src/gazebo_motor_model.cpp"
+			],
+			[
+				"motor gaze",
+				"Tools/sitl_gazebo/src/gazebo_motor_model.cpp"
+			],
+			[
+				"rc.vtol_",
+				"ROMFS/px4fmu_common/init.d/rc.vtol_apps"
+			],
+			[
+				"suction_predict.",
+				"src/nomagic_source/ros_nodes/nomagic/task/suction/predict/suction_predict.py"
+			],
+			[
+				"cart",
+				"src/nomagic_source/ros_nodes/nomagic/task/suction/predict/detect_empty_cart.py"
+			],
+			[
+				"man.t",
+				"man.txt"
+			],
+			[
+				"cvmis",
+				"src/nomagic_source/ros_nodes/nomagic/task/suction/predict/cvmisc.py"
+			],
+			[
+				"de",
+				"src/nomagic_source/ros_nodes/nomagic/task/suction/predict/detect_empty_cart.py"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 298.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
