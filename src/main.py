@@ -5,6 +5,8 @@ import numpy as np
 from lqr import lqr_ltv
 from serdict import load, save
 import matplotlib.pyplot as plt
+from transverse_feedback import TransverseFeedback
+from scipy.integrate import solve_ivp
 
 
 def load_trajectory(filename : str):
@@ -27,16 +29,16 @@ def load_trajectory(filename : str):
     }
 
 
-def eval_linsys():
-    traj = load_trajectory('traj-1.npy')
+def make_linsys(trajfile):
+    traj = load_trajectory(trajfile)
     ntrailers = traj['ntrailers']
     rhs = car_trailers_dynamics(ntrailers)
     linsys = get_trans_lin(rhs, traj)
     save('linsys.npy', linsys)
 
 
-def main():
-    traj = load_trajectory('traj-1.npy')
+def make_lqr(trajfile):
+    traj = load_trajectory(trajfile)
     linsys = load('linsys.npy')
 
     t = linsys['t']
@@ -64,6 +66,34 @@ def main():
     save('lqr.npy', lqr)
 
 
+def run_simulation(trajfile):
+    traj = load_trajectory(trajfile)
+    linsys = load('linsys.npy')
+    lqr = load('lqr.npy')
+    fb = TransverseFeedback(traj, lqr, linsys)
+    ct_rhs = car_trailers_dynamics(traj['ntrailers'])
+
+    def rhs(_, x):
+        u = fb.process(x)
+        dx = ct_rhs(x, u)
+        return np.reshape(dx, (-1,))
+
+    state0 = traj['x'][0].copy()
+    state0 += 0.02 * np.random.normal(size=state0.shape)
+    t0 = traj['t'][0]
+    t1 = traj['t'][-100]
+    t_eval = np.linspace(t0, t1, 500)
+    ans = solve_ivp(rhs, [t_eval[0], t_eval[-1]], state0, t_eval=t_eval, max_step=1e-3)
+    # assert ans.success
+    state = ans.y.T
+
+    plt.plot(traj['x'][:,0], traj['x'][:,1])
+    plt.plot(state[:,0], state[:,1])
+    plt.show()
+
+
 if __name__ == '__main__':
-    eval_linsys()
-    main()
+    trajfile = 'traj.npy'
+    make_linsys(trajfile)
+    make_lqr(trajfile)
+    run_simulation(trajfile)
