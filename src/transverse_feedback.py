@@ -3,15 +3,12 @@ from scipy.interpolate import make_interp_spline
 from scipy.optimize import fminbound
 
 
-class TransversePeriodicFeedback:
+class TransverseFeedback:
     R'''
         Trajectory tracking feedback based on the transverse linearization approach
     '''
-    def __init__(self, traj : dict, fb : dict, linsys : dict):
+    def __init__(self, traj : dict, lqr : dict, linsys : dict, periodic=None):
         R'''
-            Reference trajectory \
-                `traj` is reference trajectory \
-                `coef` is a solution of LTV LQR problem
         '''
         self.t = traj['t']
         self.t_prev = None
@@ -20,11 +17,16 @@ class TransversePeriodicFeedback:
         self.x_ref = traj['x']
         self.u_ref = traj['u']
 
-        self.x_sp = make_interp_spline(self.t, self.x_ref, bc_type='periodic')
-        self.u_sp = make_interp_spline(self.t, self.u_ref, bc_type='periodic')
+        if periodic is None:
+            periodic = np.allclose(self.x_ref[-1], self.x_ref[0])
+        
+        bc_type = 'periodic' if periodic else None
 
-        self.K_sp = make_interp_spline(fb['t'], fb['K'], bc_type='periodic')
-        self.E_sp = make_interp_spline(linsys['t'], linsys['E'], bc_type='periodic')
+        self.x_sp = make_interp_spline(self.t, self.x_ref, bc_type=bc_type)
+        self.u_sp = make_interp_spline(self.t, self.u_ref, bc_type=bc_type)
+
+        self.K_sp = make_interp_spline(lqr['t'], lqr['K'], bc_type=bc_type)
+        self.E_sp = make_interp_spline(linsys['t'], linsys['E'], bc_type=bc_type)
 
         umin = np.min(self.u_ref, axis=0)
         umax = np.max(self.u_ref, axis=0)
