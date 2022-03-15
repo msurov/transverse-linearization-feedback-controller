@@ -1,25 +1,34 @@
 import numpy as np
 from scipy.interpolate import make_interp_spline
 from scipy.optimize import fminbound
+import matplotlib.pyplot as plt
 
 
 class TransverseFeedback:
     R'''
         Trajectory tracking feedback based on the transverse linearization approach
     '''
-    def __init__(self, traj : dict, lqr : dict, linsys : dict, periodic=None):
+    def __init__(self, traj : dict, lqr : dict, linsys : dict, periodic=None, window=None):
         R'''
         '''
         self.t = traj['t']
         self.t_prev = None
 
-        self.window = 0.2
+        if window is None:
+            self.window = (self.t[-1] - self.t[0]) / 20
+        else:
+            self.window = window
+
         self.x_ref = traj['x']
         self.u_ref = traj['u']
 
         if periodic is None:
             periodic = np.allclose(self.x_ref[-1], self.x_ref[0])
         
+        if periodic:
+            self.x_ref[-1] = self.x_ref[0]
+            self.u_ref[-1] = self.u_ref[0]
+
         bc_type = 'periodic' if periodic else None
 
         self.x_sp = make_interp_spline(self.t, self.x_ref, bc_type=bc_type)

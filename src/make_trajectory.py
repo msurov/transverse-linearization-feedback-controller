@@ -46,11 +46,11 @@ def simulate(u1fun, u2fun, tspan, st1):
 
 def sample_traj_1():
     t = MX.sym('t')
-    xfun = Function('x', [t], [sin(4 * pi * t)])
-    yfun = Function('y', [t], [cos(6 * pi * t)])
+    xfun = Function('x', [t], [10*sin(4 * pi * t)])
+    yfun = Function('y', [t], [10*cos(6 * pi * t)])
     vars = eval_vars(xfun, yfun)
     
-    st0 = [0, 0, float(vars['phi'](0)), float(vars['theta0'](0)), 0, 0]
+    st0 = [0, 0, float(vars['phi'](0)), float(vars['theta0'](0)), 0, 0, 0, 0]
     tspan = [0, 1]
     t, st = simulate(vars['u1'], vars['u2'], tspan, st0)
     st0 = st[-1]

@@ -21,7 +21,13 @@ def get_trans_lin(dynamics_rhs : Function, trajectory : dict):
     _,nu = u.shape
 
     periodic = np.allclose(x[0], x[-1])
-    bc_type = 'periodic' if periodic else None
+    bc_type = None
+
+    if periodic:
+        x[-1] = x[0]
+        u[-1] = u[0]
+        bc_type = 'periodic'
+
     xsp = make_interp_spline(t, x, k=5, bc_type=bc_type)
     xsf = bsplinesf(xsp)
 
