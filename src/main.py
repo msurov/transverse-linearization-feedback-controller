@@ -2,7 +2,7 @@ from casadi import MX, Function
 from car_trailers import car_trailers_dynamics
 from transverse_linearization import get_trans_lin
 import numpy as np
-from lqr import lqr_ltv
+from lqr import lqr_ltv, lqr_ltv_periodic
 from serdict import load, save
 import matplotlib.pyplot as plt
 from transverse_feedback import TransverseFeedback
@@ -56,8 +56,13 @@ def make_lqr(trajfile):
         Q[i] = J[i].T @ Qx @ J[i]
         R[i] = np.eye(nu)
 
-    S = Q[-1]
-    K,P = lqr_ltv(t, A, B, Q, R, S)
+    periodic = np.allclose(traj['x'][0], traj['x'][-1])
+    if periodic:
+        K,P = lqr_ltv_periodic(t, A, B, Q, R)
+    else:
+        S = Q[-1]
+        K,P = lqr_ltv(t, A, B, Q, R, S)
+
     lqr = {
         't': t,
         'K': K,
@@ -84,12 +89,22 @@ def run_simulation(trajfile):
     t1 = traj['t'][-100]
     t_eval = np.linspace(t0, t1, 500)
     ans = solve_ivp(rhs, [t_eval[0], t_eval[-1]], state0, t_eval=t_eval, max_step=1e-3)
-    # assert ans.success
+    assert ans.success
     state = ans.y.T
 
-    plt.plot(traj['x'][:,0], traj['x'][:,1])
+    plt.plot(traj['x'][:,0], traj['x'][:,1], '--')
     plt.plot(state[:,0], state[:,1])
     plt.show()
+
+    traj = {
+        'ntrailers': traj['ntrailers'],
+        't': ans.t,
+        'x': state[:,0],
+        'y': state[:,1],
+        'phi': state[:,2],
+        'theta': state[:,3:].T
+    }
+    save('traj-sim.npy', traj)
 
 
 if __name__ == '__main__':
