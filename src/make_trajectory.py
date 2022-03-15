@@ -85,6 +85,7 @@ def reverse_trajectory(traj):
         'u2': -traj['u2'][::-1],
     }
 
+
 def sample_traj_2():
     traj = sample_traj_1()
     traj = reverse_trajectory(traj)

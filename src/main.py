@@ -48,7 +48,12 @@ def make_lqr(trajfile):
 
     n,nxi,nu = B.shape
     nx = nxi + 1
-    Qx = np.eye(nx)
+
+    Qx = 1000 * np.eye(nx)
+    Qx[0,0] = \
+    Qx[1,1] = 20
+    Qx[2,2] = 20
+
     R = np.zeros((n, nu, nu))
     Q = np.zeros((n, nx-1, nx-1))
 
@@ -84,10 +89,13 @@ def run_simulation(trajfile):
         return np.reshape(dx, (-1,))
 
     state0 = traj['x'][0].copy()
-    state0 += 0.02 * np.random.normal(size=state0.shape)
+    np.random.seed(0)
+    delta = 0.005 * np.random.normal(size=state0.shape)
+    print(delta)
+    state0 += delta
     t0 = traj['t'][0]
-    t1 = traj['t'][-100]
-    t_eval = np.linspace(t0, t1, 500)
+    t1 = traj['t'][-1]
+    t_eval = np.linspace(t0, t1, 200)
     ans = solve_ivp(rhs, [t_eval[0], t_eval[-1]], state0, t_eval=t_eval, max_step=1e-3)
     assert ans.success
     state = ans.y.T
@@ -109,6 +117,6 @@ def run_simulation(trajfile):
 
 if __name__ == '__main__':
     trajfile = 'traj.npy'
-    make_linsys(trajfile)
+    # make_linsys(trajfile)
     make_lqr(trajfile)
     run_simulation(trajfile)
