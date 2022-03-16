@@ -86,10 +86,10 @@ def reverse_trajectory(traj):
     }
 
 
-def sample_traj_2():
+def sample_traj_2(name):
     traj = sample_traj_1()
     traj = reverse_trajectory(traj)
-    save('traj.npy', traj)
+    save(name, traj)
 
 
-sample_traj_2()
+sample_traj_2('traj.npy')

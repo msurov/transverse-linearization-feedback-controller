@@ -58,7 +58,6 @@ def lqr_ltv(t, A, B, Q, R, S):
 
     s = np.reshape(S, (-1,))
     sol = solve_ivp(rhs, [t[-1], t[0]], s, t_eval=t[::-1], max_step=1e-3)
-    print(sol.t.shape)
     assert sol.success
 
     P = np.reshape(sol.y.T, (N, n, n))
