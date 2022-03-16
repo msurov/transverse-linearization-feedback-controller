@@ -7,6 +7,8 @@ from serdict import load, save
 import matplotlib.pyplot as plt
 from transverse_feedback import TransverseFeedback
 from scipy.integrate import solve_ivp
+from make_trajectory import sample_traj_2
+from simulator import Simulator
 
 
 def load_trajectory(filename : str):
@@ -29,17 +31,16 @@ def load_trajectory(filename : str):
     }
 
 
-def make_linsys(trajfile):
+def make_linsys(trajfile : str, linsysfile : str):
     traj = load_trajectory(trajfile)
     ntrailers = traj['ntrailers']
     rhs = car_trailers_dynamics(ntrailers)
     linsys = get_trans_lin(rhs, traj)
-    save('linsys.npy', linsys)
+    save(linsysfile, linsys)
 
 
-def make_lqr(trajfile):
-    traj = load_trajectory(trajfile)
-    linsys = load('linsys.npy')
+def make_lqr(linsysfile : str, lqrfile : str):
+    linsys = load(linsysfile)
 
     t = linsys['t']
     J = linsys['J']
@@ -61,7 +62,9 @@ def make_lqr(trajfile):
         Q[i] = J[i].T @ Qx @ J[i]
         R[i] = np.eye(nu)
 
-    periodic = np.allclose(traj['x'][0], traj['x'][-1])
+    periodic = np.allclose(linsys['A'][0], linsys['A'][-1]) and \
+        np.allclose(linsys['B'][0], linsys['B'][-1])
+
     if periodic:
         K,P = lqr_ltv_periodic(t, A, B, Q, R)
     else:
@@ -73,50 +76,50 @@ def make_lqr(trajfile):
         'K': K,
         'P': P
     }
-    save('lqr.npy', lqr)
+    save(lqrfile, lqr)
 
 
-def run_simulation(trajfile):
+def run_simulation(trajfile : str, linsysfile : str, lqrfile : str, simfile : str):
+    np.random.seed(0)
+
     traj = load_trajectory(trajfile)
-    linsys = load('linsys.npy')
-    lqr = load('lqr.npy')
+    linsys = load(linsysfile)
+    lqr = load(lqrfile)
     fb = TransverseFeedback(traj, lqr, linsys)
     ct_rhs = car_trailers_dynamics(traj['ntrailers'])
 
-    def rhs(_, x):
-        u = fb.process(x)
-        dx = ct_rhs(x, u)
-        return np.reshape(dx, (-1,))
+    sysrhs = lambda _x, _u: np.reshape(ct_rhs(_x, _u), (-1,))
+    sim = Simulator(sysrhs, fb, 5e-4)
+    st0 = traj['x'][0].copy()
+    st0 += 0.005 * np.random.normal(size=st0.shape)
+    t1 = traj['t'][0]
+    t2 = traj['t'][-1]
+    result = sim.run(st0, t1, t2)
 
-    state0 = traj['x'][0].copy()
-    np.random.seed(0)
-    delta = 0.005 * np.random.normal(size=state0.shape)
-    print(delta)
-    state0 += delta
-    t0 = traj['t'][0]
-    t1 = traj['t'][-1]
-    t_eval = np.linspace(t0, t1, 200)
-    ans = solve_ivp(rhs, [t_eval[0], t_eval[-1]], state0, t_eval=t_eval, max_step=1e-3)
-    assert ans.success
-    state = ans.y.T
+    t, st, u, fb = result
+    tau,xi = zip(*fb)
 
-    plt.plot(traj['x'][:,0], traj['x'][:,1], '--')
-    plt.plot(state[:,0], state[:,1])
-    plt.show()
-
-    traj = {
+    simdata = {
         'ntrailers': traj['ntrailers'],
-        't': ans.t,
-        'x': state[:,0],
-        'y': state[:,1],
-        'phi': state[:,2],
-        'theta': state[:,3:].T
+        't': t,
+        'x': st[:,0],
+        'y': st[:,1],
+        'phi': st[:,2],
+        'theta': st[:,3:].T,
+        'u1': u[:,0],
+        'u2': u[:,1],
+        'tau': tau,
+        'xi': xi
     }
-    save('traj-sim.npy', traj)
+    save(simfile, simdata)
 
 
 if __name__ == '__main__':
     trajfile = 'traj.npy'
-    # make_linsys(trajfile)
-    make_lqr(trajfile)
-    run_simulation(trajfile)
+    linsysfile = 'linsys.npy'
+    lqrfile = 'lqr.npy'
+    simfile = 'sim.npy'
+    # sample_traj_2(trajfile)
+    # make_linsys(trajfile, linsysfile)
+    make_lqr(linsysfile, lqrfile)
+    run_simulation(trajfile, linsysfile, lqrfile, simfile)
