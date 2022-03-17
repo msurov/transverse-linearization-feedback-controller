@@ -294,7 +294,7 @@ def animate(ref_traj, real_traj, fps=60, animtime=None, speedup=None, filepath=N
 
     def init():
         patches = cartrailers.patches()
-        [ax.add_patch(p) for p in patches]
+        for p in patches: ax.add_patch(p)
         return patches
     
     state = np.zeros((len(t), ntrailers + 3))
@@ -338,4 +338,5 @@ if __name__ == '__main__':
     datadir = tempfile.gettempdir()
     real_traj = load('traj-sim.npy')
     ref_traj = load('traj.npy')
-    animate(ref_traj, real_traj, animtime=20, filepath='data/anim.mp4')
+    # animate(ref_traj, real_traj, animtime=20, filepath='data/anim.mp4')
+    animate(ref_traj, real_traj, animtime=20)
