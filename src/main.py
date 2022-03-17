@@ -119,7 +119,7 @@ if __name__ == '__main__':
     linsysfile = 'linsys.npy'
     lqrfile = 'lqr.npy'
     simfile = 'sim.npy'
-    # sample_traj_2(trajfile)
-    # make_linsys(trajfile, linsysfile)
+    sample_traj_2(trajfile)
+    make_linsys(trajfile, linsysfile)
     make_lqr(linsysfile, lqrfile)
     run_simulation(trajfile, linsysfile, lqrfile, simfile)
