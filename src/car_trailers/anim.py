@@ -6,8 +6,7 @@ from matplotlib.colors import LinearSegmentedColormap
 from scipy.interpolate import make_interp_spline
 import tempfile
 from os.path import join
-from serdict import load
-
+from car_trailers_traj_planner.trajectory import CarTrailersTrajectory
 
 trailers_colors = [
     'forestgreen',
@@ -81,7 +80,7 @@ class Part:
     def __init__(self, cont, color, parent, alpha=0.8):
         self.parent = parent
         self.pts = cont
-        self.poly = Polygon(cont, True, zorder=3, alpha=alpha, color=color)
+        self.poly = Polygon(cont, zorder=3, alpha=alpha, color=color)
         self.x = 0.0
         self.y = 0.0
         self.a = 0.0
@@ -244,31 +243,35 @@ def to_cartesian(x, y, thetas):
     '''
         Returns cartesian trajectories of the trails
     '''
-    ntrailers, nt = np.shape(thetas)
+    nt,ntrailers = np.shape(thetas)
     trailers = np.zeros((ntrailers, nt, 2), float)
     trailers[0,:,0] = x
     trailers[0,:,1] = y
 
-    for i in range(1, ntrailers):
-        trailers[i,:,0] = trailers[i-1,:,0] - np.cos(thetas[i])
-        trailers[i,:,1] = trailers[i-1,:,1] - np.sin(thetas[i])
+    for itrailer in range(1, ntrailers):
+        trailers[itrailer,:,0] = trailers[itrailer - 1,:,0] - np.cos(thetas[:,itrailer])
+        trailers[itrailer,:,1] = trailers[itrailer - 1,:,1] - np.sin(thetas[:,itrailer])
 
     return trailers
 
 
-def animate(ref_traj, real_traj, fps=60, animtime=None, speedup=None, filepath=None):
-    ntrailers = real_traj['ntrailers']
+def animate(
+        ref_traj : CarTrailersTrajectory,
+        real_traj : CarTrailersTrajectory,
+        fps=60, animtime=None,
+        speedup=None, filepath=None
+    ):
+    ntrailers = real_traj.ntrailers
 
-    t = real_traj['t']
-    x = real_traj['x']
-    y = real_traj['y']
+    t = real_traj.time
+    x = real_traj.x
+    y = real_traj.y
 
-    phi = real_traj['phi']
-    thetas = np.array(real_traj['theta'])
+    phi = real_traj.phi
+    thetas = real_traj.theta
     npts = len(t)
 
     trailers = to_cartesian(x, y, thetas)
-
     xmin = np.min(trailers[:,:,0]) - ntrailers
     xmax = np.max(trailers[:,:,0]) + ntrailers
     ymin = np.min(trailers[:,:,1]) - ntrailers
@@ -282,7 +285,7 @@ def animate(ref_traj, real_traj, fps=60, animtime=None, speedup=None, filepath=N
     ax.set_xlim([xmin, xmax])
     ax.set_ylim([ymin, ymax])
 
-    trailers = to_cartesian(ref_traj['x'], ref_traj['y'], ref_traj['theta'])
+    trailers = to_cartesian(ref_traj.x, ref_traj.y, ref_traj.theta)
     plt.plot(trailers[-1,:,0], trailers[-1,:,1], '.', alpha=0.1, color=trailers_colors[0])
 
     cartrailers = CarTrailers(ntrailers)
@@ -296,16 +299,11 @@ def animate(ref_traj, real_traj, fps=60, animtime=None, speedup=None, filepath=N
         patches = cartrailers.patches()
         for p in patches: ax.add_patch(p)
         return patches
-    
-    state = np.zeros((len(t), ntrailers + 3))
-    state[:,0] = x
-    state[:,1] = y
-    state[:,2] = phi
-    state[:,3:] = thetas.T
-    sp = make_interp_spline(t, state, k=1)
+
+    state_sp = make_interp_spline(real_traj.time, real_traj.state, k=1)
 
     def update(i):
-        x,y,phi,*thetas = sp(t[0] + i * speedup / fps)
+        x,y,phi,*thetas = state_sp(t[0] + i * speedup / fps)
         cartrailers.move(x, y, phi, thetas)
         return cartrailers.patches()
     
@@ -332,11 +330,3 @@ def animate(ref_traj, real_traj, fps=60, animtime=None, speedup=None, filepath=N
         anim.save(filepath, writer)
     else:
         plt.show()
-
-
-if __name__ == '__main__':
-    datadir = tempfile.gettempdir()
-    real_traj = load('traj-sim.npy')
-    ref_traj = load('traj.npy')
-    # animate(ref_traj, real_traj, animtime=20, filepath='data/anim.mp4')
-    animate(ref_traj, real_traj, animtime=20)

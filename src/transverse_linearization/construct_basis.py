@@ -4,8 +4,7 @@ from scipy.interpolate import make_interp_spline
 from scipy.linalg import expm, logm
 import matplotlib.pyplot as plt
 from time import time
-from serdict import load
-import trajectory
+from common import trajectory
 
 
 def solve_ivp_mat(rhs, tspan, X0, **kwargs):
@@ -117,14 +116,3 @@ def make_basis_periodic(t, R):
     tmp = tmp[:,np.newaxis,np.newaxis] * log_RnR0
     D = np.array([expm(Si) for Si in tmp])
     return R @ D
-
-def main():
-    traj = load('traj.npy')
-    x = trajectory.state_pack(traj)
-    t = traj['t']
-    t,E = construct_basis(t, x)
-    E_sp = make_interp_spline(t, E, k=3, bc_type='periodic')
-
-if __name__ == '__main__':
-    np.set_printoptions(suppress=True)
-    main()

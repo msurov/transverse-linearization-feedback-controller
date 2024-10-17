@@ -1,11 +1,11 @@
 from casadi import MX, Function, substitute, jacobian, Function, jtimes
 import numpy as np
 from scipy.interpolate import make_interp_spline
-from construct_basis import construct_basis
-from bsplinesx import bsplinesf
+from common.bsplinesx import bsplinesf
+from .construct_basis import construct_basis
+from common.trajectory import Trajectory
 
-
-def get_trans_lin(dynamics_rhs : Function, trajectory : dict):
+def get_trans_lin(dynamics_rhs : Function, trajectory : Trajectory):
     R'''
         `dynamics_rhs` is a casadi MX Function representing 
             the right hand side of the dynamic system \
@@ -14,9 +14,9 @@ def get_trans_lin(dynamics_rhs : Function, trajectory : dict):
             `x` is state variable at the time knots
             `u` is control variable values at time knots
     '''
-    t = trajectory['t']
-    x = np.array(trajectory['x'], dtype=float)
-    u = np.array(trajectory['u'], dtype=float)
+    t = trajectory.time
+    x = trajectory.state
+    u = trajectory.control
     _,nx = x.shape
     _,nu = u.shape
 
@@ -69,7 +69,7 @@ def get_trans_lin(dynamics_rhs : Function, trajectory : dict):
 
     Jsf = Function('J', [tau], [J])
 
-    t = trajectory['t']
+    t = trajectory.time
     A = np.zeros((len(t), nx-1, nx-1))
     B = np.zeros((len(t), nx-1, nu))
     J = np.zeros((len(t), nx, nx-1))

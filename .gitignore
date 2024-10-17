@@ -1,3 +1,9 @@
 *.lyx~
 *.lyx#
 *.pyc
+build/*
+.venv/*
+*.egg-info
+*__pycache__
+data/*.npy
+data/*.mp4

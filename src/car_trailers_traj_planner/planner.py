@@ -1,10 +1,14 @@
 from re import L
-from casadi import MX, DM, Function, jacobian, sqrt, arctan2, sin, cos, pi
-from car_trailers import car_trailers_dynamics
+from casadi import (
+    MX, DM, Function, 
+    jacobian, sqrt, arctan2, 
+    sin, cos, pi
+)
+from scipy.integrate import solve_ivp
+from car_trailers.dynamics import car_trailers_dynamics
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.integrate import solve_ivp
-from serdict import load, save
+from .trajectory import CarTrailersTrajectory
 
 
 def eval_vars(x : Function, y : Function):
@@ -44,7 +48,7 @@ def simulate(u1fun, u2fun, tspan, st1):
     return ans.t, ans.y.T
 
 
-def sample_traj_1():
+def sample_traj_1() -> CarTrailersTrajectory:
     t = MX.sym('t')
     xfun = Function('x', [t], [10*sin(4 * pi * t)])
     yfun = Function('y', [t], [10*cos(6 * pi * t)])
@@ -58,38 +62,18 @@ def sample_traj_1():
 
     u1 = np.reshape(DM(vars['u1'](t)), (-1,))
     u2 = np.reshape(DM(vars['u2'](t)), (-1,))
+    u = np.concatenate(([u1], [u2]), axis=0).T
 
-    traj = {
-        'ntrailers': st.shape[1] - 3,
-        't': t,
-        'x': st[:,0],
-        'y': st[:,1],
-        'phi': st[:,2],
-        'theta': st[:,3:].T,
-        'u1': u1,
-        'u2': u2
-    }
-    return traj
-
+    return CarTrailersTrajectory(time=t, state=st, control=u)
 
 def reverse_trajectory(traj):
-    t = traj['t']
-    return {
-        'ntrailers': traj['ntrailers'],
-        't': t[-1] - t[::-1],
-        'x': traj['x'][::-1],
-        'y': traj['y'][::-1],
-        'phi': traj['phi'][::-1],
-        'theta': traj['theta'][:,::-1],
-        'u1': -traj['u1'][::-1],
-        'u2': -traj['u2'][::-1],
-    }
+    return CarTrailersTrajectory(
+        time = traj.time[-1] - traj.time[::-1],
+        state = traj.state[::-1],
+        control = -traj.control[::-1],
+    )
 
-
-def sample_traj_2(name):
+def sample_traj_2():
     traj = sample_traj_1()
     traj = reverse_trajectory(traj)
-    save(name, traj)
-
-
-sample_traj_2('traj.npy')
+    return traj

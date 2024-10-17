@@ -11,7 +11,7 @@ class TransverseFeedback:
     def __init__(self, traj : dict, lqr : dict, linsys : dict, periodic=None, window=None):
         R'''
         '''
-        self.t = traj['t']
+        self.t = traj.time
         self.t_prev = None
 
         if window is None:
@@ -19,8 +19,8 @@ class TransverseFeedback:
         else:
             self.window = window
 
-        self.x_ref = traj['x']
-        self.u_ref = traj['u']
+        self.x_ref = traj.state
+        self.u_ref = traj.control
 
         if periodic is None:
             periodic = np.allclose(self.x_ref[-1], self.x_ref[0])
