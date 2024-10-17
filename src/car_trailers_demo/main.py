@@ -125,10 +125,10 @@ def main():
     simfile = 'data/sim.npy'
     traj = sample_traj_2()
     np.save(trajfile, traj)
-    make_linsys(trajfile, linsysfile)
-    make_lqr(linsysfile, lqrfile)
-    run_simulation(trajfile, linsysfile, lqrfile, simfile)
-    run_animation(trajfile, simfile, 'data/anim.gif')
+    # make_linsys(trajfile, linsysfile)
+    # make_lqr(linsysfile, lqrfile)
+    # run_simulation(trajfile, linsysfile, lqrfile, simfile)
+    run_animation(trajfile, simfile, 'data/anim.mp4')
 
 if __name__ == '__main__':
     main()
